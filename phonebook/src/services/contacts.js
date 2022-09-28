@@ -1,8 +1,11 @@
 import axios from "axios";
-const baseUrl = "http://localhost:3001/persons";
+const baseUrl = "http://localhost:3001/api/persons";
 
 const getAllContacts = () => {
-  return axios.get(baseUrl).then((response) => response.data);
+  return axios.get(baseUrl).then((response) => {
+    console.log(response.data);
+    return response.data;
+  });
 };
 const deleteContact = (id) => {
   return axios.delete(`${baseUrl}/${id}`);
