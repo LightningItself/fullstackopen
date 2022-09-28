@@ -1,7 +1,7 @@
 import { useState } from "react";
 import ContactService from "../services/contacts";
 
-const AddPersons = ({ persons, setPersons }) => {
+const AddPersons = ({ persons, setPersons, setNotif }) => {
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
 
@@ -22,6 +22,7 @@ const AddPersons = ({ persons, setPersons }) => {
     const newPersons = persons.concat(newPerson);
     ContactService.addContact(newPerson).then(() => {
       setPersons(newPersons);
+      setNotif(`Added ${newName}`);
       setNewName("");
       setNewNumber("");
     });
