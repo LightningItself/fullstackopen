@@ -8,4 +8,12 @@ const blogSchema = new mongoose.Schema({
   user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
 });
 
+blogSchema.set("toJSON", {
+  transform: (document, requestedObject) => {
+    requestedObject.id = requestedObject._id.toString();
+    delete requestedObject._id;
+    delete requestedObject.__v;
+  },
+});
+
 module.exports = mongoose.model("Blog", blogSchema);
