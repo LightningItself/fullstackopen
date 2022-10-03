@@ -11,7 +11,6 @@ blogsRouter.get("/", async (req, res) => {
 
 blogsRouter.post("/", async (req, res) => {
   const { url, title, author, likes } = req.body;
-  const token = req.token;
   const user = req.user;
   if (user == null) {
     res.status(400).json({ error: "user not found" });
