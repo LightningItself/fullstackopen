@@ -12,12 +12,16 @@ const tokenExtractor = (req, res, next) => {
   const auth = req.get("authorization");
   if (auth && auth.toLowerCase().startsWith("bearer ")) {
     req.token = auth.substring(7);
+    console.log("found token: ", req.token);
+  } else {
+    console.log("token not found");
   }
   next();
 };
 
 const userExtractor = async (req, res, next) => {
   if (req.token === undefined) {
+    console.log("user not extracted");
     return next();
   }
   const decodedToken = await jwt.verify(req.token, config.SECRET);
@@ -25,6 +29,7 @@ const userExtractor = async (req, res, next) => {
   if (user == null) {
     return res.status(401).json({ error: "user not found" });
   }
+  console.log("user extracted", user);
   req.user = user;
 
   next();
