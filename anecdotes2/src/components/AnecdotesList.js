@@ -20,8 +20,9 @@ const AnecdotesList = () => {
   return (
     <div>
       <h3>Anecdotes List:</h3>
-      {anecdotes.map((anecdote) => (
+      {anecdotes.map((anecdote, index) => (
         <AnecdoteView
+          key={index}
           anecdote={anecdote}
           voteHandler={() => addVote(anecdote.id)}
         />
